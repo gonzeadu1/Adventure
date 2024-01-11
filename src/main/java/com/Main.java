@@ -37,6 +37,14 @@ public class Main {
         locations.get(5).addExit("W", 2);
 //        locations.get(5).addExit("Q", 0); Already initialized in the constructor
 
+        Map<String, String> vocabulary = new HashMap<>();
+        vocabulary.put("QUIT", "Q");
+        vocabulary.put("NORTH", "N");
+        vocabulary.put("SOUTH", "S");
+        vocabulary.put("WEST", "W");
+        vocabulary.put("EAST", "E");
+
+
 
         int loc = 1;
         while (true){
@@ -52,6 +60,17 @@ public class Main {
             System.out.println();
 
             String direction = scanner.nextLine().toUpperCase();
+            if(direction.length()>1){
+                String[] words = direction.split(" ");
+                for(String word : words){
+                    if(vocabulary.containsKey(word)){
+                        direction = vocabulary.get(word);
+                        break;
+                    }
+                }
+            }
+
+
             if (exits.containsKey(direction)){
                 loc = exits.get(direction);
             }else{
